@@ -1,4 +1,4 @@
-package app
+package api
 
 import (
 	"context"
@@ -8,11 +8,7 @@ import (
 	"strconv"
 )
 
-func makeRequest(ctx context.Context, method string, requestURL *url.URL, headers http.Header, body io.Reader, regOpts *registryOptions) (*http.Response, error) {
-	if requestURL.Scheme != "http" && regOpts != nil && regOpts.Insecure {
-		requestURL.Scheme = "http"
-	}
-
+func makeRequest(ctx context.Context, method string, requestURL *url.URL, headers http.Header, body io.Reader) (*http.Response, error) {
 	req, err := http.NewRequestWithContext(ctx, method, requestURL.String(), body)
 	if err != nil {
 		return nil, err
@@ -21,15 +17,6 @@ func makeRequest(ctx context.Context, method string, requestURL *url.URL, header
 	if headers != nil {
 		req.Header = headers
 	}
-
-	if regOpts != nil {
-		if regOpts.Token != "" {
-			req.Header.Set("Authorization", "Bearer "+regOpts.Token)
-		} else if regOpts.Username != "" && regOpts.Password != "" {
-			req.SetBasicAuth(regOpts.Username, regOpts.Password)
-		}
-	}
-
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:129.0) Gecko/20100101 Firefox/129.0")
 
 	if s := req.Header.Get("Content-Length"); s != "" {

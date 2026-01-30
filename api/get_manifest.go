@@ -1,4 +1,4 @@
-package app
+package api
 
 import (
 	"context"
@@ -30,12 +30,12 @@ type Layer struct {
 	status    string
 }
 
-func GetManifest(ctx context.Context, modelPath ModelPath, regOpts *registryOptions) (*Manifest, string, error) {
+func GetManifest(ctx context.Context, modelPath ModelPath) (*Manifest, string, error) {
 	requestURL := modelPath.BaseURL().JoinPath("v2", modelPath.GetNamespaceRepository(), "manifests", modelPath.Tag)
 
 	headers := make(http.Header)
 	headers.Set("Accept", "application/vnd.docker.distribution.manifest.v2+json")
-	resp, err := makeRequest(ctx, http.MethodGet, requestURL, headers, nil, regOpts)
+	resp, err := makeRequest(ctx, http.MethodGet, requestURL, headers, nil)
 	if err != nil {
 		return nil, "", err
 	}

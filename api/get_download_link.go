@@ -1,9 +1,8 @@
-package app
+package api
 
 type DownloadLinkConfig struct {
 	ModelPath ModelPath
 	Digest    string
-	RegOpts   *registryOptions
 }
 
 func (c *DownloadLinkConfig) GetDownloadLink() string {

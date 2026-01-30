@@ -1,4 +1,4 @@
-package app
+package api
 
 import (
 	"context"
@@ -13,7 +13,7 @@ func TestMakeRequestToRegistry(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to parse URL: %v", err)
 	}
-	resp, err := makeRequest(context.Background(), http.MethodGet, parsedURL, nil, nil, nil)
+	resp, err := makeRequest(context.Background(), http.MethodGet, parsedURL, nil, nil)
 	if err != nil {
 		t.Fatalf("makeRequest() error: %v", err)
 	}
