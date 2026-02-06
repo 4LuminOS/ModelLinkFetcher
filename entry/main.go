@@ -6,7 +6,12 @@ import (
 	"fmt"
 	"os"
 )
-func GetLink(modelName string) {
+
+type Links struct {
+	ManifestLink string
+	DownloadLinks []string
+}
+func GetLink(modelName string) (links Links) {
 	fmt.Println("Fetching direct download link for model:", modelName)
 
 	parsedModelPath := api.ParseModelPath(modelName)
@@ -39,7 +44,10 @@ func GetLink(modelName string) {
 	}
 	fmt.Println("Generated download links for model:", modelName)
 	fmt.Println("Finished successfully!")
-	os.Exit(0)
+	return Links{
+		ManifestLink: manifestLink,
+		DownloadLinks: downloadLinks,
+	}
 }
 
 func Install(modelName string, blobsPath string, ) {
