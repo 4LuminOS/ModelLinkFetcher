@@ -2,7 +2,7 @@ package entry
 
 import (
 	"context"
-	"github.com/4LuminOS/ollaDownloader/api"
+	"github.com/4LuminOS/ModelLinkFetcher/api"
 	"fmt"
 	"os"
 )

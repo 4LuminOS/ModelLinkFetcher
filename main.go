@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/4LuminOS/ollaDownloader/api/entry"
+	"github.com/4LuminOS/ModelLinkFetcher/entry"
 )
 
 func main() {
